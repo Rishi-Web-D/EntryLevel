@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/create.css" />
+  </head>
+  <body>
+    <nav>
+      <p><a href="/">Home</a></p>
+      <p><a href="/createUser">Create user</a></p>
+      <p><a href="/allUsers">All user</a></p>
+    </nav>
+    <div class="container">
+      <form action="/createUser" method="post" id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+        <label for="mobile">Mobile:</label>
+        <input type="mobile" id="mobile" name="mobile" required />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+    <script>
+      document.getElementById('myForm').addEventListener('submit', function(event) {
+          event.preventDefault();
+          const email = document.getElementById('email').value;
+          const mobile = document.getElementById('mobile').value;
+          if (!isValidEmail(email)) {
+              alert('Please enter a valid email address.');
+              return false;
+          }
+          if (!isValidMobile(mobile)) {
+              alert('Please enter a valid mobile number.');
+              return false;
+          }
+          // Proceed with form submission
+          this.submit();
+      });
+  
+      function isValidEmail(email) {
+          const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return regex.test(email);
+      }
+  
+      function isValidMobile(mobile) {
+          const regex = /^[0-9]{10}$/;
+          return regex.test(mobile);
+      }
+  </script>
+  </body>
+</html>

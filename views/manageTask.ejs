@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/manageTask.css" />
+  </head>
+  <body>
+    <nav>
+      <p><a href="/">Home</a></p>
+      <p><a href="/allUsers">All user</a></p>
+      <p><a href="/createUser">Create user</a></p>
+      <p><a href="/exportTasks/<%=user._id%>">Export tasks</a></p>
+      <p><button onclick="togglePopup()">Add new Task</button></p>
+    </nav>
+    <h1 style="text-align: center; font-weight: 500">Manage Task Page</h1>
+
+    <h1 class="headings">User Details</h1>
+    <div class="table-box">
+      <div class="table-row table-head">
+        <div class="table-cell">
+          <p>User Name</p>
+        </div>
+        <div class="table-cell">
+          <p>User Email</p>
+        </div>
+        <div class="table-cell">
+          <p>User Mobile</p>
+        </div>
+      </div>
+      <div class="table-row">
+        <div class="table-cell">
+          <p><%=user.name%></p>
+        </div>
+        <div class="table-cell">
+          <p><%=user.email%></p>
+        </div>
+        <div class="table-cell">
+          <p><%=user.mobile%></p>
+        </div>
+      </div>
+    </div>
+    <h1 class="headings">Tasks Details</h1>
+    <div class="table-box">
+      <div class="table-row table-head">
+        <div class="table-cell">
+          <p>Task Name</p>
+        </div>
+        <div class="table-cell">
+          <p>Task Type</p>
+        </div>
+        <div class="table-cell">
+          <p>Task Status</p>
+        </div>
+      </div>
+      <% tasks.forEach((task)=>{ %>
+      <div class="table-row">
+        <div class="table-cell">
+          <p><%=task.taskName%></p>
+        </div>
+        <div class="table-cell">
+          <p><%=task.taskType%></p>
+        </div>
+        <div class="table-cell">
+          <p><%=task.status%></p>
+        </div>
+      </div>
+
+      <% })%>
+    </div>
+    <div id="taskPopup" class="popup">
+      <form action="/addTask" method="POST">
+        <input
+          type="text"
+          name="userId"
+          value="<%=user._id%>"
+          style="display: none"
+        />
+        <label for="taskName">Task Name:</label><br />
+        <input type="text" id="taskName" name="taskName" /><br />
+        <label for="taskType">Task Type:</label><br />
+        <input type="text" id="taskType" name="taskType" /><br />
+        <label for="taskStatus">Task Status:</label><br />
+        <select name="status" id="taskStatus">
+          <option value="Pending">Pending</option>
+          <option value="Done">Done</option>
+        </select>
+        <br /><br />
+        <button type="submit">Add Task</button>
+      </form>
+    </div>
+    <script>
+      // JavaScript to toggle the display of the popup
+      function togglePopup() {
+        var popup = document.getElementById("taskPopup");
+        popup.style.display =
+          popup.style.display === "block" ? "none" : "block";
+      }
+    </script>
+  </body>
+</html>
