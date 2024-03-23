@@ -38,7 +38,7 @@ router.post("/addTask", async function (req, res, next) {
     user.tasks.push(task._id);
     await task.save();
     await user.save();
-    res.redirect("/allUsers");
+    res.redirect(`/manageTask/${req.body.userId}`);
   } catch (error) {
     res.send("Error in adding task");
   }
